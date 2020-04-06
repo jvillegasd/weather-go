@@ -9,7 +9,8 @@ module.exports.weatherByCity = async cityName => {
 
     return response.data;
   } catch (error) {
-    console.log("error fetching weather by city", (error.data) ? error.data : error);
-    throw "an error ocurred while fetching weather by city";
+    let responseError = error.response;
+    console.log("error fetching weather by city", (responseError && responseError.data) ? responseError.data : error);
+    throw (responseError.data.cod === "404") ? "City not found" :  "Error - fetching weather by city";
   }
 };
