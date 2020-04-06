@@ -1,0 +1,35 @@
+version: '3.7'
+
+services:
+  nginx:
+    image: nginx:alpine
+    container_name: nginx
+    depends_on: 
+      - weather_go
+    volumes:
+    - ./config/nginx.conf:/etc/nginx.conf.d/default.conf
+    ports:
+      - 80:80
+    environment: 
+      - NODEJS_PORT=${NODEJS_PORT}
+    networks:
+      - Weather_Go_Network
+  weather_go:
+    container_name: weather_go
+    build: ./
+    restart: unless-stopped
+    volumes:
+      - ./:/app
+      - node_modules:/app/node_modules
+    env_file: .env
+    ports:
+      - ${NODEJS_PORT}:${NODEJS_PORT}
+    networks:
+      - Weather_Go_Network
+
+volumes:
+  node_modules:
+
+networks:
+  Weather_Go_Network:
+    driver: bridge
