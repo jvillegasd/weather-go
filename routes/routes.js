@@ -3,9 +3,9 @@ let express = require("express");
 let router = express.Router();
 
 //Controllers
-const simpleForecast = require("../controllers/simpleForecast");
+const currentWeather = require("../controllers/currentWeather");
 
-router.use("/simple", simpleForecast);
+router.use("/current", currentWeather);
 
 //Server root route
 router.get("/", (request, response) => {
