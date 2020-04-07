@@ -1,4 +1,9 @@
+//Libs
 let axios = require("axios");
+let nodeEmoji = require("node-emoji");
+
+//Helpers
+let helper = require("../helpers/helper");
 
 module.exports.weatherByCity = async cityName => {
   try {
@@ -7,7 +12,7 @@ module.exports.weatherByCity = async cityName => {
       method: "GET"
     });
 
-    return response.data;
+    return helper.formatWeatherJSON(response.data);
   } catch (error) {
     let responseError = error.response;
     console.log("error fetching weather by city", (responseError && responseError.data) ? responseError.data : error);

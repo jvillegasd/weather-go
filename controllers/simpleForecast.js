@@ -1,6 +1,5 @@
-let express = require("express");
-
 //Libs
+let express = require("express");
 let weather = require("../libs/weather");
 
 let router = express.Router();
