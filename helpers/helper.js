@@ -16,6 +16,29 @@ const unixToDateString = (time, shift) => {
     hour12: true
   });
 };
+const weatherToEmoji = (condition, id, icon) => {
+  switch (condition) {
+    case "Thunderstorm":
+      if (id >= 200 && id <= 202 || id >= 230 && id <= 232) return nodeEmoji.emojify(":thunder_cloud_and_rain:");
+      else return nodeEmoji.emojify(":lightning_cloud:");
+    case "Drizzle":
+      break;
+    case "Rain":
+      if (id >= 500 && id <= 504) return nodeEmoji.emojify(":sun_behind_rain_cloud:");
+      else if (id === 511) return nodeEmoji.emojify(":snow_cloud:");
+      else return nodeEmoji.emojify(":rain_cloud:");
+    case "Snow":
+      return nodeEmoji.emojify(":snowflake:");
+    case "Clouds":
+      if (id === 801) return nodeEmoji.emojify(":partly_sunny:");
+      else return nodeEmoji.emojify(":cloud:");
+    case "Clear":
+      if (icon === "01d") return nodeEmoji.emojify(":sunny:");
+      else return nodeEmoji.emojify(":new_moon:");
+    default: //Atmosphere cases
+      return nodeEmoji.emojify(":question:");
+  }
+};
 
 module.exports.formatWeatherJSON = response => {
   return {
