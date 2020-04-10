@@ -1,3 +1,6 @@
+//Libs
+let nodeEmoji = require("node-emoji");
+
 const kelvinToCelsius = temp => { return temp - 273.15; };
 const kelvinToFahrenheit = temp => { return temp * 9/5 - 459.67; };
 const meterToKilometer = meassure => { return meassure / 1000; };
@@ -51,4 +54,8 @@ module.exports.formatWeatherJSON = response => {
     sunrise: unixToDateString(response.sys.sunrise, response.timezone),
     sunset: unixToDateString(response.sys.sunset, response.timezone)
   };
+};
+
+module.exports.formatWeather = response => {
+  let weather = response.weather[0].main;
 };
