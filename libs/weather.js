@@ -11,10 +11,20 @@ module.exports.weatherByCity = async (cityName, format) => {
       method: "GET"
     });
     
-    if (format === "json") return helper.formatWeatherJSON(response.data);
-    else if (format === "1") return helper.formatWeatherEmojiOne(response.data);
-    else if (format === "4") return helper.formatWeatherEmojiFour(response.data);
-    else throw { formatError: "Format not supported" };
+    switch (format) {
+      case "json":
+        return helper.formatWeatherJSON(response.data);
+      case "1":
+        return helper.formatWeatherEmojiOne(response.data);
+      case "2":
+        return helper.formatWeatherEmojiTwo(response.data);
+      case "3":
+        return helper.formatWeatherEmojiThree(response.data);
+      case "4":
+        return helper.formatWeatherEmojiFour(response.data);
+      default:
+        throw { formatError: "Format not supported" };
+    }
   } catch (error) {
     let responseError = error.response;
     console.log("error fetching weather by city", (responseError && responseError.data) ? responseError.data : error);
@@ -30,10 +40,20 @@ module.exports.weatherByZipCode = async (zipCode, countryCode, format) => {
       method: "GET"
     });
 
-    if (format === "json") return helper.formatWeatherJSON(response.data);
-    else if (format === "1") return helper.formatWeatherEmojiOne(response.data);
-    else if (format === "4") return helper.formatWeatherEmojiFour(response.data);
-    else throw { formatError: "Format not supported" };
+    switch (format) {
+      case "json":
+        return helper.formatWeatherJSON(response.data);
+      case "1":
+        return helper.formatWeatherEmojiOne(response.data);
+      case "2":
+        return helper.formatWeatherEmojiTwo(response.data);
+      case "3":
+        return helper.formatWeatherEmojiThree(response.data);
+      case "4":
+        return helper.formatWeatherEmojiFour(response.data);
+      default:
+        throw { formatError: "Format not supported" };
+    }
   } catch (error) {
     let responseError = error.response;
     console.log("error fetching weather by zip code", (responseError && responseError.data) ? responseError.data : error);
@@ -49,10 +69,20 @@ module.exports.weatherByCoord = async (latitude, longitude, format) => {
       method: "GET"
     });
     console.log(response.data)
-    if (format === "json") return helper.formatWeatherJSON(response.data);
-    else if (format === "1") return helper.formatWeatherEmojiOne(response.data);
-    else if (format === "4") return helper.formatWeatherEmojiFour(response.data);
-    else throw { formatError: "Format not supported" };
+    switch (format) {
+      case "json":
+        return helper.formatWeatherJSON(response.data);
+      case "1":
+        return helper.formatWeatherEmojiOne(response.data);
+      case "2":
+        return helper.formatWeatherEmojiTwo(response.data);
+      case "3":
+        return helper.formatWeatherEmojiThree(response.data);
+      case "4":
+        return helper.formatWeatherEmojiFour(response.data);
+      default:
+        throw { formatError: "Format not supported" };
+    }
   } catch (error) {
     let responseError = error.response;
     console.log("error fetching weather by coordinates", (responseError && responseError.data) ? responseError.data : error);

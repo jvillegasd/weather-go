@@ -42,15 +42,15 @@ const weatherToEmoji = (condition, id, icon) => {
       else return nodeEmoji.emojify(":grey_question:");
   }
 };
-const windDegreeToEmoji = degree => {
-  if (degree === 0 || degree === 360) return nodeEmoji.emojify(":arrow_right:");
-  else if (degree > 0 && degree < 90) return nodeEmoji.emojify(":arrow_upper_right:");
-  else if (degree === 90) return nodeEmoji.emojify(":arrow_up:");
-  else if (degree > 90 && degree < 180) return nodeEmoji.emojify(":arrow_upper_left:");
-  else if (degree === 180) return nodeEmoji.emojify(":arrow_left:");
-  else if (degree > 180 && degree < 270) return nodeEmoji.emojify(":arrow_lower_left:");
-  else if (degree === 270) return nodeEmoji.emojify(":arrow_down:");
-  else return nodeEmoji.emojify(":arrow_lower_right:"); 
+const windDegreeToArrow = degree => {
+  if (degree === 0 || degree === 360) return "\u2192";
+  else if (degree > 0 && degree < 90) return "\u2197";
+  else if (degree === 90) return "\u2191";
+  else if (degree > 90 && degree < 180) return "\u2196";
+  else if (degree === 180) return "\u2190";
+  else if (degree > 180 && degree < 270) return "\u2199";
+  else if (degree === 270) return "\u2193";
+  else return "\u2198"; 
 };
 
 module.exports.formatWeatherJSON = response => {
@@ -94,14 +94,28 @@ module.exports.formatWeatherJSON = response => {
 
 module.exports.formatWeatherEmojiOne = response => {
   let conditionEmoji = weatherToEmoji(response.weather[0].main, response.weather[0].id, response.weather[0].icon);
-  let temperature = `${kelvinToCelsius(response.main.temp).toFixed(2)} °C`;
+  let temperature = `${kelvinToCelsius(response.main.temp).toFixed(2)}°C`;
   return nodeEmoji.emojify(`${conditionEmoji} ${temperature}`);
+};
+
+module.exports.formatWeatherEmojiTwo = response => {
+  let conditionEmoji = weatherToEmoji(response.weather[0].main, response.weather[0].id, response.weather[0].icon);
+  let temperature = `${kelvinToCelsius(response.main.temp).toFixed(2)}°C`;
+  let windSpeed = `${mpsToKmph(response.wind.speed).toFixed(2)} Km/h`;
+  let windDegreeEmoji = windDegreeToArrow(response.wind.deg);
+  return nodeEmoji.emojify(`${conditionEmoji} :thermometer:${temperature} :wind_blowing_face:${windDegreeEmoji}${windSpeed}`);
+};
+
+module.exports.formatWeatherEmojiThree = response => {
+  let conditionEmoji = weatherToEmoji(response.weather[0].main, response.weather[0].id, response.weather[0].icon);
+  let temperature = `${kelvinToCelsius(response.main.temp).toFixed(2)}°C`;
+  return nodeEmoji.emojify(`${response.name}: ${conditionEmoji} ${temperature}`);
 };
 
 module.exports.formatWeatherEmojiFour = response => {
   let conditionEmoji = weatherToEmoji(response.weather[0].main, response.weather[0].id, response.weather[0].icon);
-  let temperature = `${kelvinToCelsius(response.main.temp).toFixed(2)} °C`;
+  let temperature = `${kelvinToCelsius(response.main.temp).toFixed(2)}°C`;
   let windSpeed = `${mpsToKmph(response.wind.speed).toFixed(2)} Km/h`;
-  let windDegreeEmoji = windDegreeToEmoji(response.wind.deg);
-  return nodeEmoji.emojify(`${response.name}: ${conditionEmoji} :thermometer: ${temperature} :wind_blowing_face: ${windDegreeEmoji} ${windSpeed}`);
+  let windDegreeEmoji = windDegreeToArrow(response.wind.deg);
+  return nodeEmoji.emojify(`${response.name}: ${conditionEmoji} :thermometer:${temperature} :wind_blowing_face:${windDegreeEmoji}${windSpeed}`);
 };
