@@ -52,6 +52,20 @@ const windDegreeToArrow = degree => {
   else if (degree === 270) return "\u2193";
   else return "\u2198";
 };
+const supportedParams = param => {
+  switch (param) {
+    case "h":
+    case "p":
+    case "w":
+    case "wd":
+    case "t":
+    case "l":
+    case "c":
+      return true;
+    default:
+      return false;
+  }
+};
 
 module.exports.formatWeatherJSON = response => {
   return {
@@ -122,8 +136,8 @@ module.exports.formatWeatherEmojiFour = response => {
 
 module.exports.customInfo = (custom, response) => {
   let output = {};
-  let supportedParams = custom.filter((element, index, self) => self.indexOf(element) === index && (element === "h" || element === "p" || element === "w" || element === "wd"));
-  for (let param of supportedParams) {
+  let distinctParams = custom.filter((element, index, self) => self.indexOf(element) === index && supportedParams(element));
+  for (let param of distinctParams) {
     switch (param) {
       case "h":
         output.humidity = nodeEmoji.emojify(`:droplet:${response.main.humidity}%`);
@@ -138,9 +152,18 @@ module.exports.customInfo = (custom, response) => {
         let windDegreeArrow = windDegreeToArrow(response.wind.deg);
         output.windDegree = nodeEmoji.emojify(`${windDegreeArrow}`);
         break;
+      case "t":
+        let temperature = `${kelvinToCelsius(response.main.temp).toFixed(2)}°C`;
+        output.temperature = nodeEmoji.emojify(`:thermometer:${temperature}`);
+        break;
+      case "l":
+        output.city = response.name;
+        break;
+      case "c":
+        output.countryCode = response.sys.country;
       default:
         break;
     }
   }
-  return output;
+  return ((Object.entries(output)).length) ? output : undefined;
 };

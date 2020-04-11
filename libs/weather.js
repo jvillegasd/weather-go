@@ -11,31 +11,29 @@ module.exports.weatherByCity = async (cityName, format, custom) => {
       url: `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${process.env.WEATHER_API_KEY}`,
       method: "GET"
     });
-    
-    let customInfo = helper.customInfo(custom, response.data);
-    customInfo = ((Object.entries(customInfo)).length) ? customInfo : undefined;
+
     switch (format) {
       case "json":
         return { main: helper.formatWeatherJSON(response.data) };
       case "1":
         return {
           main: helper.formatWeatherEmojiOne(response.data),
-          custom: customInfo
+          custom: helper.customInfo(custom, response.data)
         };
       case "2":
         return {
           main: helper.formatWeatherEmojiTwo(response.data),
-          custom: customInfo
+          custom: helper.customInfo(custom, response.data)
         };
       case "3":
         return {
           main: helper.formatWeatherEmojiThree(response.data),
-          custom: customInfo
+          custom: helper.customInfo(custom, response.data)
         };
       case "4":
         return {
           main: helper.formatWeatherEmojiFour(response.data),
-          custom: customInfo
+          custom: helper.customInfo(custom, response.data)
         };
       default:
         throw { formatError: "Format not supported" };
@@ -55,31 +53,29 @@ module.exports.weatherByZipCode = async (zipCode, countryCode, format, custom) =
       url: `https://api.openweathermap.org/data/2.5/weather?zip=${zipCode},${countryCode}&appid=${process.env.WEATHER_API_KEY}`,
       method: "GET"
     });
-    
-    let customInfo = helper.customInfo(custom, response.data);
-    customInfo = ((Object.entries(customInfo)).length) ? customInfo : undefined;
+
     switch (format) {
       case "json":
         return { main: helper.formatWeatherJSON(response.data) };
       case "1":
         return {
           main: helper.formatWeatherEmojiOne(response.data),
-          custom: customInfo
+          custom: helper.customInfo(custom, response.data)
         };
       case "2":
         return {
           main: helper.formatWeatherEmojiTwo(response.data),
-          custom: customInfo
+          custom: helper.customInfo(custom, response.data)
         };
       case "3":
         return {
           main: helper.formatWeatherEmojiThree(response.data),
-          custom: customInfo
+          custom: helper.customInfo(custom, response.data)
         };
       case "4":
         return {
           main: helper.formatWeatherEmojiFour(response.data),
-          custom: customInfo
+          custom: helper.customInfo(custom, response.data)
         };
       default:
         throw { formatError: "Format not supported" };
@@ -99,31 +95,29 @@ module.exports.weatherByCoord = async (latitude, longitude, format, custom) => {
       url: `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${process.env.WEATHER_API_KEY}`,
       method: "GET"
     });
-    
-    let customInfo = helper.customInfo(custom, response.data);
-    customInfo = ((Object.entries(customInfo)).length) ? customInfo : undefined;
+
     switch (format) {
       case "json":
         return { main: helper.formatWeatherJSON(response.data) };
       case "1":
         return {
           main: helper.formatWeatherEmojiOne(response.data),
-          custom: customInfo
+          custom: helper.customInfo(custom, response.data)
         };
       case "2":
         return {
           main: helper.formatWeatherEmojiTwo(response.data),
-          custom: customInfo
+          custom: helper.customInfo(custom, response.data)
         };
       case "3":
         return {
           main: helper.formatWeatherEmojiThree(response.data),
-          custom: customInfo
+          custom: helper.customInfo(custom, response.data)
         };
       case "4":
         return {
           main: helper.formatWeatherEmojiFour(response.data),
-          custom: customInfo
+          custom: helper.customInfo(custom, response.data)
         };
       default:
         throw { formatError: "Format not supported" };
