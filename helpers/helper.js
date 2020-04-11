@@ -102,8 +102,8 @@ module.exports.formatWeatherEmojiTwo = response => {
   let conditionEmoji = weatherToEmoji(response.weather[0].main, response.weather[0].id, response.weather[0].icon);
   let temperature = `${kelvinToCelsius(response.main.temp).toFixed(2)}°C`;
   let windSpeed = `${mpsToKmph(response.wind.speed).toFixed(2)} Km/h`;
-  let windDegreeEmoji = windDegreeToArrow(response.wind.deg);
-  return nodeEmoji.emojify(`${conditionEmoji} :thermometer:${temperature} :wind_blowing_face:${windDegreeEmoji}${windSpeed}`);
+  let windDegreeArrow = windDegreeToArrow(response.wind.deg);
+  return nodeEmoji.emojify(`${conditionEmoji} :thermometer:${temperature} :wind_blowing_face:${windDegreeArrow}${windSpeed}`);
 };
 
 module.exports.formatWeatherEmojiThree = response => {
@@ -116,13 +116,13 @@ module.exports.formatWeatherEmojiFour = response => {
   let conditionEmoji = weatherToEmoji(response.weather[0].main, response.weather[0].id, response.weather[0].icon);
   let temperature = `${kelvinToCelsius(response.main.temp).toFixed(2)}°C`;
   let windSpeed = `${mpsToKmph(response.wind.speed).toFixed(2)} Km/h`;
-  let windDegreeEmoji = windDegreeToArrow(response.wind.deg);
-  return nodeEmoji.emojify(`${response.name}: ${conditionEmoji} :thermometer:${temperature} :wind_blowing_face:${windDegreeEmoji}${windSpeed}`);
+  let windDegreeArrow = windDegreeToArrow(response.wind.deg);
+  return nodeEmoji.emojify(`${response.name}: ${conditionEmoji} :thermometer:${temperature} :wind_blowing_face:${windDegreeArrow}${windSpeed}`);
 };
 
 module.exports.customInfo = (custom, response) => {
   let output = {};
-  let supportedParams = custom.filter((element, index, self) => self.indexOf(element) === index && (element === "h" || element === "p"));
+  let supportedParams = custom.filter((element, index, self) => self.indexOf(element) === index && (element === "h" || element === "p" || element === "w" || element === "wd"));
   for (let param of supportedParams) {
     switch (param) {
       case "h":
@@ -130,6 +130,13 @@ module.exports.customInfo = (custom, response) => {
         break;
       case "p":
         output.pressure = nodeEmoji.emojify(`:arrow_heading_down:${response.main.pressure} hPa`);
+        break;
+      case "w":
+        output.windSpeed = nodeEmoji.emojify(`:wind_blowing_face:${mpsToKmph(response.wind.speed).toFixed(2)} Km/h`);
+        break;
+      case "wd":
+        let windDegreeArrow = windDegreeToArrow(response.wind.deg);
+        output.windDegree = nodeEmoji.emojify(`${windDegreeArrow}`);
         break;
       default:
         break;
