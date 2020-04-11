@@ -2,7 +2,7 @@
 let nodeEmoji = require("node-emoji");
 
 const kelvinToCelsius = temp => { return temp - 273.15; };
-const kelvinToFahrenheit = temp => { return temp * 9/5 - 459.67; };
+const kelvinToFahrenheit = temp => { return temp * 9 / 5 - 459.67; };
 const meterToKilometer = meassure => { return meassure / 1000; };
 const mpsToKmph = meassure => { return meassure * 3.6; };
 const secToHour = time => { return time / 3600 };
@@ -50,7 +50,7 @@ const windDegreeToArrow = degree => {
   else if (degree === 180) return "\u2190";
   else if (degree > 180 && degree < 270) return "\u2199";
   else if (degree === 270) return "\u2193";
-  else return "\u2198"; 
+  else return "\u2198";
 };
 
 module.exports.formatWeatherJSON = response => {
@@ -118,4 +118,22 @@ module.exports.formatWeatherEmojiFour = response => {
   let windSpeed = `${mpsToKmph(response.wind.speed).toFixed(2)} Km/h`;
   let windDegreeEmoji = windDegreeToArrow(response.wind.deg);
   return nodeEmoji.emojify(`${response.name}: ${conditionEmoji} :thermometer:${temperature} :wind_blowing_face:${windDegreeEmoji}${windSpeed}`);
+};
+
+module.exports.customInfo = (custom, response) => {
+  let output = {};
+  let supportedParams = custom.filter((element, index, self) => self.indexOf(element) === index && (element === "h" || element === "p"));
+  for (let param of supportedParams) {
+    switch (param) {
+      case "h":
+        output.humidity = nodeEmoji.emojify(`:droplet:${response.main.humidity}%`);
+        break;
+      case "p":
+        output.pressure = nodeEmoji.emojify(`:arrow_heading_down:${response.main.pressure} hPa`);
+        break;
+      default:
+        break;
+    }
+  }
+  return output;
 };

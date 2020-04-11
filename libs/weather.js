@@ -4,24 +4,39 @@ let axios = require("axios");
 //Helpers
 let helper = require("../helpers/helper");
 
-module.exports.weatherByCity = async (cityName, format) => {
+module.exports.weatherByCity = async (cityName, format, custom) => {
+  custom = (custom) ? custom.split(",") : [];
   try {
     let response = await axios({
       url: `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${process.env.WEATHER_API_KEY}`,
       method: "GET"
     });
     
+    let customInfo = helper.customInfo(custom, response.data);
+    customInfo = ((Object.entries(customInfo)).length) ? customInfo : undefined;
     switch (format) {
       case "json":
-        return helper.formatWeatherJSON(response.data);
+        return { main: helper.formatWeatherJSON(response.data) };
       case "1":
-        return helper.formatWeatherEmojiOne(response.data);
+        return {
+          main: helper.formatWeatherEmojiOne(response.data),
+          custom: customInfo
+        };
       case "2":
-        return helper.formatWeatherEmojiTwo(response.data);
+        return {
+          main: helper.formatWeatherEmojiTwo(response.data),
+          custom: customInfo
+        };
       case "3":
-        return helper.formatWeatherEmojiThree(response.data);
+        return {
+          main: helper.formatWeatherEmojiThree(response.data),
+          custom: customInfo
+        };
       case "4":
-        return helper.formatWeatherEmojiFour(response.data);
+        return {
+          main: helper.formatWeatherEmojiFour(response.data),
+          custom: customInfo
+        };
       default:
         throw { formatError: "Format not supported" };
     }
@@ -33,24 +48,39 @@ module.exports.weatherByCity = async (cityName, format) => {
   }
 };
 
-module.exports.weatherByZipCode = async (zipCode, countryCode, format) => {
+module.exports.weatherByZipCode = async (zipCode, countryCode, format, custom) => {
+  custom = (custom) ? custom.split(",") : [];
   try {
     let response = await axios({
       url: `https://api.openweathermap.org/data/2.5/weather?zip=${zipCode},${countryCode}&appid=${process.env.WEATHER_API_KEY}`,
       method: "GET"
     });
-
+    
+    let customInfo = helper.customInfo(custom, response.data);
+    customInfo = ((Object.entries(customInfo)).length) ? customInfo : undefined;
     switch (format) {
       case "json":
-        return helper.formatWeatherJSON(response.data);
+        return { main: helper.formatWeatherJSON(response.data) };
       case "1":
-        return helper.formatWeatherEmojiOne(response.data);
+        return {
+          main: helper.formatWeatherEmojiOne(response.data),
+          custom: customInfo
+        };
       case "2":
-        return helper.formatWeatherEmojiTwo(response.data);
+        return {
+          main: helper.formatWeatherEmojiTwo(response.data),
+          custom: customInfo
+        };
       case "3":
-        return helper.formatWeatherEmojiThree(response.data);
+        return {
+          main: helper.formatWeatherEmojiThree(response.data),
+          custom: customInfo
+        };
       case "4":
-        return helper.formatWeatherEmojiFour(response.data);
+        return {
+          main: helper.formatWeatherEmojiFour(response.data),
+          custom: customInfo
+        };
       default:
         throw { formatError: "Format not supported" };
     }
@@ -62,24 +92,39 @@ module.exports.weatherByZipCode = async (zipCode, countryCode, format) => {
   }
 };
 
-module.exports.weatherByCoord = async (latitude, longitude, format) => {
+module.exports.weatherByCoord = async (latitude, longitude, format, custom) => {
+  custom = (custom) ? custom.split(",") : [];
   try {
     let response = await axios({
       url: `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${process.env.WEATHER_API_KEY}`,
       method: "GET"
     });
-    console.log(response.data)
+    
+    let customInfo = helper.customInfo(custom, response.data);
+    customInfo = ((Object.entries(customInfo)).length) ? customInfo : undefined;
     switch (format) {
       case "json":
-        return helper.formatWeatherJSON(response.data);
+        return { main: helper.formatWeatherJSON(response.data) };
       case "1":
-        return helper.formatWeatherEmojiOne(response.data);
+        return {
+          main: helper.formatWeatherEmojiOne(response.data),
+          custom: customInfo
+        };
       case "2":
-        return helper.formatWeatherEmojiTwo(response.data);
+        return {
+          main: helper.formatWeatherEmojiTwo(response.data),
+          custom: customInfo
+        };
       case "3":
-        return helper.formatWeatherEmojiThree(response.data);
+        return {
+          main: helper.formatWeatherEmojiThree(response.data),
+          custom: customInfo
+        };
       case "4":
-        return helper.formatWeatherEmojiFour(response.data);
+        return {
+          main: helper.formatWeatherEmojiFour(response.data),
+          custom: customInfo
+        };
       default:
         throw { formatError: "Format not supported" };
     }

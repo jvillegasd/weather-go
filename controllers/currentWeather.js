@@ -11,10 +11,14 @@ router.get("/", (request, response) => {
 router.get("/:city", async (request, response) => {
   try {
     let format = request.query.format;
+    let custom = request.query.custom;
     let cityName = request.params.city;
-    let forecast = await weather.weatherByCity(cityName, format);
+    let currentWeather = await weather.weatherByCity(cityName, format, custom);
 
-    response.status(200).json({ forecast });
+    response.status(200).json({
+      currentWeather: currentWeather.main,
+      custom: currentWeather.custom
+    });
   } catch (error) {
     response.status(500).json({ errorMessage: error });
   }
@@ -24,11 +28,15 @@ router.get("/:city", async (request, response) => {
 router.get("/country/:countryCode/zip/:zipCode", async (request, response) => {
   try {
     let format = request.query.format;
+    let custom = request.query.custom;
     let countryCode = request.params.countryCode;
     let zipCode = request.params.zipCode;
-    let forecast = await weather.weatherByZipCode(zipCode, countryCode, format);
+    let currentWeather = await weather.weatherByZipCode(zipCode, countryCode, format, custom);
 
-    response.status(200).json({ forecast });
+    response.status(200).json({
+      currentWeather: currentWeather.main,
+      custom: currentWeather.custom
+    });
   } catch (error) {
     response.status(500).json({ errorMessage: error });
   }
@@ -37,11 +45,15 @@ router.get("/country/:countryCode/zip/:zipCode", async (request, response) => {
 router.get("/latitude/:latitude/longitude/:longitude", async (request, response) => {
   try {
     let format = request.query.format;
+    let custom = request.query.custom;
     let latitude = request.params.latitude;
     let longitude = request.params.longitude;
-    let forecast = await weather.weatherByCoord(latitude, longitude, format);
+    let currentWeather = await weather.weatherByCoord(latitude, longitude, format, custom);
 
-    response.status(200).json({ forecast });
+    response.status(200).json({
+      currentWeather: currentWeather.main,
+      custom: currentWeather.custom
+    });
   } catch (error) {
     response.status(500).json({ errorMessage: error });
   }
