@@ -1,3 +1,5 @@
+"use strict";
+
 //Libs
 let axios = require("axios");
 

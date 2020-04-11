@@ -1,3 +1,5 @@
+"use strict";
+
 //Libs
 let nodeEmoji = require("node-emoji");
 

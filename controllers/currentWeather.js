@@ -1,3 +1,5 @@
+"use strict";
+
 //Libs
 let express = require("express");
 let weather = require("../libs/weather");
@@ -23,7 +25,6 @@ router.get("/:city", async (request, response) => {
     response.status(500).json({ errorMessage: error });
   }
 });
-
 
 router.get("/country/:countryCode/zip/:zipCode", async (request, response) => {
   try {
