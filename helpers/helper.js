@@ -63,6 +63,8 @@ const supportedParams = param => {
     case "t":
     case "l":
     case "c":
+    case "sr":
+    case "ss":
       return true;
     default:
       return false;
@@ -163,6 +165,17 @@ module.exports.customInfo = (custom, response) => {
         break;
       case "c":
         output.countryCode = response.sys.country;
+        break;
+      case "sr":
+        let sunrise = unixToDateString(response.sys.sunrise, response.timezone);
+        sunrise = (sunrise) ? sunrise.split(",")[1] : undefined;
+        output.sunrise = (sunrise) ? nodeEmoji.emojify(`:city_sunrise:${sunrise}`) : sunrise;
+        break;
+      case "ss":
+        let sunset = unixToDateString(response.sys.sunset, response.timezone);
+        sunset = (sunset) ? sunset.split(",")[1] : undefined;
+        output.sunset = (sunset) ? nodeEmoji.emojify(`:city_sunset:${sunset}`) : sunset;
+        break;
       default:
         break;
     }
