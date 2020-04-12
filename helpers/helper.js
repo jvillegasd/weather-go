@@ -169,12 +169,12 @@ module.exports.customInfo = (custom, response) => {
       case "sr":
         let sunrise = unixToDateString(response.sys.sunrise, response.timezone);
         sunrise = (sunrise) ? sunrise.split(",")[1] : undefined;
-        output.sunrise = (sunrise) ? nodeEmoji.emojify(`:city_sunrise:${sunrise}`) : sunrise;
+        output.sunrise = (sunrise) ? nodeEmoji.emojify(`:city_sunrise:${sunrise.trim()}`) : sunrise;
         break;
       case "ss":
         let sunset = unixToDateString(response.sys.sunset, response.timezone);
         sunset = (sunset) ? sunset.split(",")[1] : undefined;
-        output.sunset = (sunset) ? nodeEmoji.emojify(`:city_sunset:${sunset}`) : sunset;
+        output.sunset = (sunset) ? nodeEmoji.emojify(`:city_sunset:${sunset.trim()}`) : sunset;
         break;
       default:
         break;
