@@ -60,7 +60,7 @@ module.exports.weatherByCoord = async (latitude, longitude, format, custom) => {
 function formatResponse(response, format, custom) {
   switch (format) {
     case "json":
-      return { main: helper.formatWeatherJSON(Response) };
+      return { main: helper.formatWeatherJSON(response) };
     case "1":
       return {
         main: helper.formatWeatherEmojiOne(response),
