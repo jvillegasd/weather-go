@@ -86,7 +86,7 @@ Custom parameters can be used if the response format is emojified JSON.
     c	Country code
     sr	🌇 Sunrise
     ss	🌆 Sunset
-The `custom` query parameter has to be provided. You can concatenate them!
+The `custom` query parameter has to be provided. You can concatenate them!\
 **Example**
 
 	  Request:	/London?format=1&custom=h,sr,ss,t
