@@ -6,8 +6,8 @@ Weather-Go supports various information representation like JSON, emojified JSON
 
 ## Running it in local
 
-This project is dockerized. Run the project with the following command:
-`docker-compose up -d`
+This project is dockerized. Run the project with the following command:\
+`docker-compose up -d`\
 PS: A Nginx container is used for deploy the dockerized project.
 
 ## Setting Environment
@@ -31,8 +31,8 @@ Weather-Go currently supports these formats:
 
 For receive the desired format, you have to add the `format` query parameter.
 
-The JSON format was re-format from original OpenWeatherMap response.
-*JSON format input: `?format=json`.*
+The JSON format was re-format from original OpenWeatherMap response.\
+*JSON format input: `?format=json`.*\
 **Example:**
 
     {
