@@ -85,7 +85,7 @@ Custom parameters can be used if the response format is emojified JSON.
     l	City name
     c	Country code
     sr	🌇 Sunrise in location time
-    ss	🌆 Sunset in location
+    ss	🌆 Sunset in location time
 The `custom` query parameter has to be provided. You can concatenate them!\
 **Example**
 
