@@ -31,8 +31,8 @@ Weather-Go currently supports these formats:
 
 For receive the desired format, you have to add the `format` query parameter.
 
-The JSON format was re-format from original OpenWeatherMap response.
-*JSON format input: `?format=json`.*
+The JSON format was re-format from original OpenWeatherMap response.\
+*JSON format input: `?format=json`.*\
 **Example:**
 `{
     "currentWeather": {
@@ -71,7 +71,7 @@ The JSON format was re-format from original OpenWeatherMap response.
         "sunrise": "4/16/2020, 06:01 AM",
         "sunset": "4/16/2020, 07:58 PM"
     }
-}`
+}`\
 You can use the JSON emojified format feature:
 *	Format 1:
 	*	*Format input: `?format=1`.*
