@@ -81,11 +81,11 @@ Custom parameters can be used if the response format is emojified JSON.
     p	⤵️ Pressure in hPa
     w	🌬️ Wind speed in Km/h
     wd	↙ Wind direction
-    t	🌡️ Temperature un Celsius
+    t	🌡️ Temperature in Celsius
     l	City name
     c	Country code
-    sr	🌇 Sunrise
-    ss	🌆 Sunset
+    sr	🌇 Sunrise in location time
+    ss	🌆 Sunset in location
 The `custom` query parameter has to be provided. You can concatenate them!\
 **Example**
 
