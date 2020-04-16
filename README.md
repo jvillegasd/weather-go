@@ -6,8 +6,8 @@ Weather-Go supports various information representation like JSON, emojified JSON
 
 ## Running it in local
 
-This project is dockerized. Run the project with the following command:\
-`docker-compose up -d`\
+This project is dockerized. Run the project with the following command:
+`docker-compose up -d`
 PS: A Nginx container is used for deploy the dockerized project.
 
 ## Setting Environment
@@ -31,48 +31,35 @@ Weather-Go currently supports these formats:
 
 For receive the desired format, you have to add the `format` query parameter.
 
-The JSON format was re-format from original OpenWeatherMap response.\
-*JSON format input: `?format=json`.*\
+The JSON format was re-format from original OpenWeatherMap response.
+*JSON format input: `?format=json`.*
 **Example:**
-`{
-    "currentWeather": {
-        "coord": {
-            "lon": "-0.13",
-            "lat": "51.51"
-        },
-        "weather": {
-            "main": "Clear",
-            "description": "clear sky"
-        },
-        "temp": {
-            "celsius": {
-                "current": "4.34 °C",
-                "feelsLike": "1.26 °C",
-                "min": "2.22 °C",
-                "max": "7.22 °C"
+
+    {
+        "currentWeather": {
+            "coord": {
+                "lon": "-0.13",
+                "lat": "51.51"
             },
-            "fahrenheit": {
-                "current": "39.81 °F",
-                "feelsLike": "34.27 °F",
-                "min": "36.00 °F",
-                "max": "45.00 °F"
+            "weather": {
+                "main": "Clear",
+                "description": "clear sky"
             },
-            "pressure": "1017 hPa",
-            "humidity": "87 %"
-        },
-        "visibility": "6.00 Km/h",
-        "wind": {
-            "speed": "7.56 Km/h",
-            "degree": "60°"
-        },
-        "country": "GB",
-        "city": "London",
-        "timezone": "1 UTC",
-        "sunrise": "4/16/2020, 06:01 AM",
-        "sunset": "4/16/2020, 07:58 PM"
+            ...,
+            "visibility": "6.00 Km/h",
+            "wind": {
+                "speed": "7.56 Km/h",
+                "degree": "60°"
+            },
+            "country": "GB",
+            "city": "London",
+            "timezone": "1 UTC",
+            "sunrise": "4/16/2020, 06:01 AM",
+            "sunset": "4/16/2020, 07:58 PM"
+        }
     }
-}`\
-You can use the JSON emojified format feature:
+
+You can use the emojified JSON format feature:
 *	Format 1:
 	*	*Format input: `?format=1`.*
 	*	Response: `{ "currentWeather":  "🌑 4.43°C" }`
@@ -85,6 +72,36 @@ You can use the JSON emojified format feature:
 *	Format 4:
 	*	*Format input: `?format=4`.*
 	*	Response: `{ "currentWeather":  "Detroit: ⛅ 🌡️-1.00°C 🌬️↓11.16 Km/h" }`
+
+
+## Custom parameters
+Custom parameters can be used if the response format is emojified JSON.
+
+    h	💧 Humidity
+    p	⤵️ Pressure in hPa
+    w	🌬️ Wind speed in Km/h
+    wd	↙ Wind direction
+    t	🌡️ Temperature un Celsius
+    l	City name
+    c	Country code
+    sr	🌇 Sunrise
+    ss	🌆 Sunset
+The `custom` query parameter has to be provided. You can concatenate them!
+**Example**
+
+	  Request:	/London?format=1&custom=h,sr,ss,t
+	  Response: 
+	  {
+		  "currentWeather":  "⛅ -1.25°C",
+		  "custom":  {
+			  "humidity":  "💧74%",
+			  "sunrise":  "🌇06:48 AM",
+			  "sunset":  "🌆08:14 PM",
+			  "temperature":  "🌡️-1.25°C"
+	       }
+	  }
+    
+
 ## TODO
 
 * Implement the JSON-based ANSI-sequences format
