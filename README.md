@@ -32,7 +32,7 @@ Weather-Go currently supports these formats:
 For receive the desired format, you have to add the `format` query parameter.
 
 The JSON format was re-format from original OpenWeatherMap response.\
-*JSON format input: `?format=json`.*\
+*JSON format input:* `?format=json`.\
 **Example:**
 
     {
@@ -61,16 +61,16 @@ The JSON format was re-format from original OpenWeatherMap response.\
 
 You can use the emojified JSON format feature:
 *	Format 1:
-	*	*Format input: `?format=1`.*
+	*	Format input: `?format=1`.
 	*	Response: `{ "currentWeather":  "🌑 4.43°C" }`
 *	Format 2:
-	*	*Format input: `?format=2`.*
+	*	Format input: `?format=2`.
 	*	Response: `{ "currentWeather":  "🌑 🌡️4.43°C 🌬️↗7.56 Km/h" }`
 *	Format 3:
-	*	*Format input: `?format=3`.*
+	*	Format input: `?format=3`.*
 	*	Response: `{ "currentWeather":  "London: 🌑 4.28°C" }`
 *	Format 4:
-	*	*Format input: `?format=4`.*
+	*	Format input: `?format=4`.*
 	*	Response: `{ "currentWeather":  "Detroit: ⛅ 🌡️-1.00°C 🌬️↓11.16 Km/h" }`
 
 
@@ -84,22 +84,22 @@ Custom parameters can be used if the response format is emojified JSON.
     t	🌡️ Temperature in Celsius
     l	City name
     c	Country code
-    sr	🌇 Sunrise in location time
-    ss	🌆 Sunset in location time
-The `custom` query parameter has to be provided. You can concatenate them!\
+    sr	🌇 Sunrise
+    ss	🌆 Sunset
+The `custom` query parameter has to be provided. You can concatenate them!
 **Example**
 
 	  Request:	/London?format=1&custom=h,sr,ss,t
 	  Response: 
 	  {
-		  "currentWeather":  "⛅ -1.25°C",
-		  "custom":  {
-			  "humidity":  "💧74%",
-			  "sunrise":  "🌇06:48 AM",
-			  "sunset":  "🌆08:14 PM",
-			  "temperature":  "🌡️-1.25°C"
-	       }
-	  }
+	     "currentWeather": "⛅ 2.41°C",
+	     "custom": {
+	         "humidity": "💧37%",
+	         "sunrise": "🌇06:48 AM",
+	         "sunset": "🌆08:14 PM",
+	         "temperature": "🌡️2.41°C"
+	     }
+      }
     
 
 ## TODO
