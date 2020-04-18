@@ -105,7 +105,7 @@ The `custom` query parameter has to be provided. You can concatenate them!
 		         "ilumination": "14.91%"
 	         }
 	     }
-      }
+    }
     
 
 ## TODO
