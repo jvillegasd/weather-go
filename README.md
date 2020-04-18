@@ -21,7 +21,7 @@ Weather-Go current endpoints:
 	*	By city: `/:city`
 	*	By zipcode: `/country/:country/zip/:zip`
 	*	By coordinates: `/latitude/:latitude/longitude/:longitude`
-* Moon phase (WIP)
+* Moon phase is available as custom parameter
 * Forecast (WIP)	
 ## Supported output formats
 
@@ -86,10 +86,11 @@ Custom parameters can be used if the response format is emojified JSON.
     c	Country code
     sr	🌇 Sunrise
     ss	🌆 Sunset
+    mp	🌘 Moon phase
 The `custom` query parameter has to be provided. You can concatenate them!
 **Example**
 
-	  Request:	/London?format=1&custom=h,sr,ss,t
+	  Request:	/London?format=1&custom=h,sr,ss,t,mp
 	  Response: 
 	  {
 	     "currentWeather": "⛅ 2.41°C",
@@ -97,7 +98,12 @@ The `custom` query parameter has to be provided. You can concatenate them!
 	         "humidity": "💧37%",
 	         "sunrise": "🌇06:48 AM",
 	         "sunset": "🌆08:14 PM",
-	         "temperature": "🌡️2.41°C"
+	         "temperature": "🌡️2.41°C",
+	         "moonPhase": {
+		         "emoji": "🌘",
+		         "name": "Waning crescent",
+		         "ilumination": "14.91%"
+	         }
 	     }
       }
     
@@ -105,5 +111,4 @@ The `custom` query parameter has to be provided. You can concatenate them!
 ## TODO
 
 * Implement the JSON-based ANSI-sequences format
-* Finish the Moon phase port to JavaScript
 * Forecast

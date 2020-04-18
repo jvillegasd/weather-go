@@ -2,6 +2,7 @@
 
 //Libs
 let nodeEmoji = require("node-emoji");
+let sunCalc = require("suncalc");
 
 const kelvinToCelsius = temp => { return temp - 273.15; };
 const kelvinToFahrenheit = temp => { return temp * 9 / 5 - 459.67; };
@@ -65,10 +66,31 @@ const supportedParams = param => {
     case "c":
     case "sr":
     case "ss":
+    case "mp":
       return true;
     default:
       return false;
   }
+};
+const moonPhaseToEmoji = phase => {
+  switch (phase) {
+    case 0:
+      return { moonPhaseEmoji: nodeEmoji.emojify(":new_moon:"), moonPhase: "New moon" };
+    case phase > 0 && phase < 0.25:
+      return { moonPhaseEmoji: nodeEmoji.emojify(":waxing_crescent_moon:"), moonPhase: "Waxing crescent" };
+    case 0.25:
+      return { moonPhaseEmoji: nodeEmoji.emojify(":first_quarter_moon:"), moonPhase: "First quarter" };
+    case phase > 0.25 && phase < 0.5:
+      return { moonPhaseEmoji: nodeEmoji.emojify(":waxing_gibbous_moon:"), moonPhase: "Waxing gibbous" };
+    case 0.5:
+      return { moonPhaseEmoji: nodeEmoji.emojify(":full_moon:"), moonPhase: "Full moon" };
+    case phase > 0.5 && phase < 0.75:
+      return { moonPhaseEmoji: nodeEmoji.emojify(":waning_gibbous_moon:"), moonPhase: "Waxing gibbous" };
+    case 0.75:
+      return { moonPhaseEmoji: nodeEmoji.emojify(":last_quarter_moon:"), moonPhase: "Last quarter" };
+    default:
+      return { moonPhaseEmoji: nodeEmoji.emojify(":waning_crescent_moon:"), moonPhase: "Waning crescent" };
+  };
 };
 
 module.exports.formatWeatherJSON = response => {
@@ -175,6 +197,19 @@ module.exports.customInfo = (custom, response) => {
         let sunset = unixToDateString(response.sys.sunset, response.timezone);
         sunset = (sunset) ? sunset.split(",")[1] : undefined;
         output.sunset = (sunset) ? nodeEmoji.emojify(`:city_sunset:${sunset.trim()}`) : sunset;
+        break;
+      case "mp":
+        let time = new Date(Date.now());
+        let shiftHour = secToHour(response.timezone);
+        time.setHours(time.getHours() + shiftHour);
+        let moonIlumination = sunCalc.getMoonIllumination(time);
+        let { moonPhaseEmoji, moonPhase } = moonPhaseToEmoji(moonIlumination.phase);
+        let formatedIlumination = (moonIlumination.fraction * 100).toFixed(2);
+        output.moonPhase = {
+          emoji: moonPhaseEmoji,
+          name: moonPhase,
+          ilumination: `${formatedIlumination}%`
+        };
         break;
       default:
         break;
