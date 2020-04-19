@@ -11,11 +11,13 @@ This project is dockerized. Run the project with the following command:\
 PS: A Nginx container is used for deploy the dockerized project.
 
 ## Setting Environment
+
 This project uses two `ENV` variables:
 *	Project exposed port: `NODEJS_PORT`
 *	OpenWeatherMap API key: `WEATHER_API_KEY`
 
 ##	Usage
+
 Weather-Go current endpoints:
 *	Current weather
 	*	By city: `/:city`
@@ -23,6 +25,7 @@ Weather-Go current endpoints:
 	*	By coordinates: `/latitude/:latitude/longitude/:longitude`
 * Moon phase is available as custom parameter
 * Forecast (WIP)	
+
 ## Supported output formats
 
 Weather-Go currently supports these formats:
@@ -67,14 +70,15 @@ You can use the emojified JSON format feature:
 	*	Format input: `?format=2`.
 	*	Response: `{ "currentWeather":  "🌑 🌡️4.43°C 🌬️↗7.56 Km/h" }`
 *	Format 3:
-	*	Format input: `?format=3`.*
+	*	Format input: `?format=3`.
 	*	Response: `{ "currentWeather":  "London: 🌑 4.28°C" }`
 *	Format 4:
-	*	Format input: `?format=4`.*
+	*	Format input: `?format=4`.
 	*	Response: `{ "currentWeather":  "Detroit: ⛅ 🌡️-1.00°C 🌬️↓11.16 Km/h" }`
 
 
 ## Custom parameters
+
 Custom parameters can be used if the response format is emojified JSON.
 
     h	💧 Humidity
@@ -87,7 +91,7 @@ Custom parameters can be used if the response format is emojified JSON.
     sr	🌇 Sunrise
     ss	🌆 Sunset
     mp	🌘 Moon phase
-The `custom` query parameter has to be provided. You can concatenate them!
+The `custom` query parameter has to be provided. You can concatenate them!\
 **Example**
 
 	  Request:	/London?format=1&custom=h,sr,ss,t,mp
@@ -109,6 +113,4 @@ The `custom` query parameter has to be provided. You can concatenate them!
     
 
 ## TODO
-
-* Implement the JSON-based ANSI-sequences format
 * Forecast
