@@ -1,7 +1,7 @@
 # Weather-Go!
 
 Weather-Go is wrapper for OpenWeatherMap API. This project is inspired by [wttr](https://github.com/chubin/wttr.in).
-Weather-Go supports various information representation like JSON, emojified JSON weather and JSON-based ANSI-sequences.
+Weather-Go supports various information representation like JSON and emojified JSON weather.
 
 
 ## Running it in local
@@ -92,7 +92,7 @@ Custom parameters can be used if the response format is emojified JSON.
     ss	🌆 Sunset
     mp	🌘 Moon phase
 The `custom` query parameter has to be provided. You can concatenate them!\
-**Example**
+**Example:**
 
 	  Request:	/London?format=1&custom=h,sr,ss,t,mp
 	  Response: 
