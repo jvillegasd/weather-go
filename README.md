@@ -24,7 +24,8 @@ Weather-Go current endpoints:
 	*	By zipcode: `/country/:country/zip/:zip`
 	*	By coordinates: `/latitude/:latitude/longitude/:longitude`
 * Moon phase is available as custom parameter
-* Forecast (WIP)	
+* 7 days Forecasting endpoint:
+  * By coordinates: `forecast/latitude/:latitude/longitude/:longitude`
 
 ## Supported output formats
 
@@ -112,5 +113,6 @@ The `custom` query parameter has to be provided. You can concatenate them!\
       }
     
 
-## TODO
-* Forecast
+## 7 days Forecasting
+
+Weather-Go provides forecasting by Coordinates. All output formats and custom parameters are are available!

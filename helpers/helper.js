@@ -217,3 +217,32 @@ module.exports.customInfo = (custom, response) => {
   }
   return ((Object.entries(output)).length) ? output : undefined;
 };
+
+module.exports.formatForecastWeather = response => {
+  let formattedWeather = {
+    coord: {
+      lat: response.lat,
+      lon: response.lon
+    },
+    timezone: response.timezone_offset,
+    weather: response.weather,
+    wind: {
+      speed: response.wind_speed,
+      deg: response.wind_deg
+    },
+    sys: {
+      sunrise: response.sunrise,
+      sunset: response.sunset
+    },
+    name: `lat: ${response.lat}, long: ${response.lon}`,
+    main: {
+      temp: response.temp.day,
+      feels_like: response.feels_like.day,
+      temp_min: response.temp.min,
+      temp_max: response.temp.max,
+      pressure: response.pressure,
+      humidity: response.humidity
+    }
+  };
+  return formattedWeather;
+};
